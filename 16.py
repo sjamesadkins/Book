@@ -62,9 +62,26 @@ print(time_to_int(int_to_time(108000)) == 108000)
 t = int_to_time(108000)
 print_time(t)
 
+def valid_time(time):
+    if time.hour < 0 or time.minute < 0 or time.second < 0:
+        return False
+    if time.minute >= 60 or time.second >= 60:
+        return False
+    return True
+
+# using "raise"
+# def add_time(t1, t2):
+#     if not valid_time(t1) or not valid_time(t2):
+#         raise ValueError('invalid Time object in add_time')
+#     seconds = time_to_int(t1) + time_to_int(t2)
+#     return int_to_time(seconds)
+
+# using "assert"
 def add_time(t1, t2):
+    assert valid_time(t1) and valid_time(t2)
     seconds = time_to_int(t1) + time_to_int(t2)
     return int_to_time(seconds)
+
 
 time1 = Time()
 time1.second = 4
@@ -76,9 +93,20 @@ time2.second = 4
 time2.minute = 8
 time2.hour = 10
 
+time3 = Time()
+time3.second = 100
+time3.minute = 48
+time3.hour = 5
+
 # print(time_to_int(time1))
 # print(time_to_int(time2))
 # seconds = time_to_int(time1) + time_to_int(time2)
 # print(seconds)
 
 print_time(add_time(time1, time2))
+print_time(add_time(time1, time3))
+
+
+
+
+
